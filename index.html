@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Serverpanel</title>
+    <link rel="stylesheet" href="styles.css?v=3" />
+  </head>
+  <body>
+    <main id="loginView" class="login-view">
+      <section class="login-card" aria-labelledby="loginTitle">
+        <img class="login-banner" src="assets/login-banner.jpg" alt="SCB banner" />
+        <div class="lock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M7 10V8a5 5 0 0 1 10 0v2" />
+            <rect x="4.5" y="10" width="15" height="10" rx="2" />
+          </svg>
+        </div>
+        <h1 id="loginTitle">SERVERPANEL</h1>
+        <p>Logga in för att fortsätta</p>
+
+        <form id="loginForm" class="login-form">
+          <label for="usernameInput">Användarnamn</label>
+          <input id="usernameInput" name="username" type="text" autocomplete="username" placeholder="Ange användarnamn" required />
+
+          <label for="passwordInput">Lösenord</label>
+          <input id="passwordInput" name="password" type="password" autocomplete="current-password" placeholder="Ange lösenord" required />
+
+          <p id="loginError" class="login-error" role="alert"></p>
+          <button class="button button-gradient login-submit" type="submit">Logga in</button>
+        </form>
+      </section>
+    </main>
+
+    <main id="appView" class="app-view hidden">
+      <div class="content">
+        <header class="topbar">
+          <label class="search-wrap" for="searchInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m16 16 4 4" />
+            </svg>
+            <input id="searchInput" class="search" type="search" placeholder="Sök namn eller Discord-ID" />
+          </label>
+          <button id="resetBtn" class="button button-gradient top-action" type="button">Återställ</button>
+          <button id="logoutBtn" class="button button-danger top-action" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <path d="M16 17l5-5-5-5" />
+              <path d="M21 12H9" />
+            </svg>
+            Logga ut
+          </button>
+        </header>
+
+        <h1 class="page-title">SERVERPANEL</h1>
+
+        <section class="add-panel" aria-labelledby="addTitle">
+          <h2 id="addTitle">
+            <span class="title-accent"></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M19 8v6" />
+              <path d="M22 11h-6" />
+            </svg>
+            Lägg till medlem
+          </h2>
+
+          <form id="memberForm" class="member-form">
+            <div class="field">
+              <label for="nameInput">Medlemsnamn</label>
+              <input id="nameInput" type="text" placeholder="t.ex. Kira Voss" required />
+            </div>
+            <div class="field">
+              <label for="discordInput">Discord-ID</label>
+              <input id="discordInput" type="text" inputmode="numeric" placeholder="t.ex. 294710382957" required />
+            </div>
+            <div class="field">
+              <label for="roleInput">Roll / tjänst</label>
+              <select id="roleInput">
+                <option>Räddningstjänst</option>
+                <option>Polismyndigheten</option>
+                <option>Sjukvården</option>
+                <option>SOS</option>
+                <option selected>Civilperson</option>
+                <option>Serverledning</option>
+                <option>Utvecklingsteam</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="statusInput">Status</label>
+              <select id="statusInput">
+                <option selected>Aktiv</option>
+                <option>Inaktiv</option>
+                <option>Ledig</option>
+              </select>
+            </div>
+            <button class="button button-gradient add-button" type="submit">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M19 8v6" />
+                <path d="M22 11h-6" />
+              </svg>
+              Lägg till
+            </button>
+          </form>
+        </section>
+
+        <section class="members-section" aria-labelledby="membersTitle">
+          <div class="members-heading">
+            <h2 id="membersTitle">Medlemmar</h2>
+            <div class="members-tools">
+              <details id="filterMenu" class="filter-menu">
+                <summary class="filter-toggle">Filtrera</summary>
+                <div class="filter-panel">
+                  <fieldset>
+                    <legend>Yrken</legend>
+                    <label><input type="checkbox" name="role" value="Räddningstjänst" /> Räddningstjänst</label>
+                    <label><input type="checkbox" name="role" value="Polismyndigheten" /> Polis</label>
+                    <label><input type="checkbox" name="role" value="Sjukvården" /> Sjukvården</label>
+                    <label><input type="checkbox" name="role" value="SOS" /> SOS</label>
+                    <label><input type="checkbox" name="role" value="Civilperson" /> Civilperson</label>
+                    <label><input type="checkbox" name="role" value="Serverledning" /> Serverledning</label>
+                    <label><input type="checkbox" name="role" value="Utvecklingsteam" /> Utvecklingsteam</label>
+                  </fieldset>
+
+                  <fieldset>
+                    <legend>Status</legend>
+                    <label><input type="checkbox" name="status" value="Aktiv" /> Aktiv</label>
+                    <label><input type="checkbox" name="status" value="Inaktiv" /> Inaktiv</label>
+                    <label><input type="checkbox" name="status" value="Ledig" /> Ledig</label>
+                  </fieldset>
+
+                  <fieldset>
+                    <legend>Övrigt</legend>
+                    <label><input id="warningFilter" type="checkbox" /> Inaktivitetsvarning</label>
+                    <label><input id="patrolFilter" type="checkbox" /> Minst 1 patrull</label>
+                  </fieldset>
+
+                  <button id="clearFiltersBtn" class="clear-filters" type="button">Rensa filter</button>
+                </div>
+              </details>
+              <span id="memberCount" class="count-pill">0 / 0</span>
+            </div>
+          </div>
+          <div id="members" class="members" aria-live="polite"></div>
+          <p id="emptyState" class="empty-state hidden">Ingen medlem matchar sökningen.</p>
+        </section>
+      </div>
+    </main>
+
+    <template id="memberTemplate">
+      <article class="member-card">
+        <span class="status-dot"></span>
+        <h3 class="member-name"></h3>
+
+        <dl class="member-meta">
+          <div>
+            <dt>Roll</dt>
+            <dd class="member-role"></dd>
+          </div>
+          <div>
+            <dt>Discord-ID</dt>
+            <dd class="member-discord"></dd>
+          </div>
+          <div>
+            <dt>Patrullar</dt>
+            <dd class="member-patrols"></dd>
+          </div>
+        </dl>
+
+        <div class="actions">
+          <button class="mini-button patrol-plus" type="button">+1 Patrull</button>
+          <button class="mini-button patrol-minus" type="button">-1 Patrull</button>
+          <button class="mini-button remove" type="button">Ta bort</button>
+        </div>
+
+        <button class="warning-button inactivity-warning" type="button">Inaktivitetsvarning</button>
+
+        <div class="status-actions">
+          <button class="status-button status-active" type="button">Aktiv</button>
+          <button class="status-button status-inactive" type="button">Inaktiv</button>
+          <button class="status-button status-available" type="button">Ledig</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js?v=3"></script>
+  </body>
+</html>
